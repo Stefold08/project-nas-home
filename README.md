@@ -36,6 +36,15 @@ bash project-nas-home/aggiorna.sh --automatico
 
 Per spegnerlo: `--manuale`. Per vedere che versione c'è e se l'automatico è acceso: `--stato`.
 
+## Se qualcosa non va
+
+```
+bash project-nas-home/diagnosi.sh
+```
+
+Controlla la Videoteca, la rete e Tailscale senza cambiare niente, e stampa un riepilogo
+da mandare a Claude.
+
 ## Usarla fuori casa
 
 ```

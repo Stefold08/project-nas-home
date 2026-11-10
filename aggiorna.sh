@@ -117,7 +117,7 @@ stato() {
   fi
   if systemctl is-enabled --quiet "$UNIT.timer" 2>/dev/null; then
     echo "Aggiornamento automatico: acceso"
-    journalctl -u "$UNIT.service" -n 6 --no-pager -o cat 2>/dev/null | sed 's/^/  /' || true
+    journalctl -u "$UNIT.service" -n 30 --no-pager -o cat 2>/dev/null | grep -v pam_unix | tail -n 4 | sed 's/^/  /' || true
   else
     echo "Aggiornamento automatico: spento"
   fi
