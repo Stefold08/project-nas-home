@@ -1,0 +1,2 @@
+#!/bin/sh
+echo '{"Self":{"DNSName":"rasberry-daniele-casa.tail1234.ts.net."}}'

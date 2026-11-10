@@ -1,0 +1,4 @@
+__pycache__/
+test/schermate/
+*.pyc
+.DS_Store
