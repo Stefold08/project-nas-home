@@ -57,8 +57,10 @@ main() {
   echo "Fatto! Con Tailscale acceso anche sul Mac o sul telefono, da qualsiasi rete:"
   echo "  Videoteca:  http://$ip:$porta"
   echo "  Terminale:  ssh $utente@$ip"
-  echo "Consiglio: nella console di Tailscale, sul Pi scegli «Disable key expiry»,"
-  echo "così non devi rifare l'accesso tra qualche mese."
+  echo
+  echo "Ultimo passo, dal browser del Mac o del telefono (non qui nel terminale):"
+  echo "apri login.tailscale.com/admin/machines, sulla riga del Pi premi i tre puntini"
+  echo "a destra e scegli «Disable key expiry». Così non dovrai rifare l'accesso tra sei mesi."
 }
 
 main "$@"; exit $?

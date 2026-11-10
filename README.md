@@ -46,6 +46,11 @@ Installa Tailscale sul Pi e lo collega al tuo account (inquadri un codice QR col
 Poi installa l'app Tailscale sul Mac e sul telefono con lo stesso account: lo script ti
 dice l'indirizzo da usare, tipo `http://100.x.y.z:8080`, valido da qualsiasi rete.
 
+Ultimo passo, dal browser (non nel terminale del Pi): apri la pagina
+[Machines](https://login.tailscale.com/admin/machines) della console di Tailscale, sulla riga
+del Pi premi i tre puntini a destra e scegli «Disable key expiry». Senza questo, tra sei mesi
+il Pi chiederebbe di rifare l'accesso e da fuori casa non lo raggiungeresti più.
+
 ## Cosa c'è qui dentro
 
 | File | A cosa serve |

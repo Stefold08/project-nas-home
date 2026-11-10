@@ -50,6 +50,13 @@ aggiorna() {
   if [ "$solo_se_cambiato" = "1" ] && [ "$head" = "$installata" ]; then
     return 0
   fi
+  # In automatico, se è cambiato solo altro (README, script, prove) la Videoteca
+  # installata è già giusta: non la reinstallo, così non si riavvia per niente.
+  if [ "$solo_se_cambiato" = "1" ] && [ -n "$installata" ] \
+     && come_proprietario git -C "$REPO" diff --quiet "$installata" HEAD -- installa-videoteca.sh 2>/dev/null; then
+    printf '%s\n' "$head" | come_proprietario tee "$MARKER" >/dev/null
+    return 0
+  fi
 
   echo "Installo la versione $(descrivi '%h del %cd: %s')"
   if [ "$(id -u)" -eq 0 ]; then
