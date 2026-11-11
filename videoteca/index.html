@@ -301,6 +301,82 @@ dialog.medium { width: min(720px, calc(100vw - 24px)); }
 }
 #pwRemove { margin-top: 12px; }
 
+/* Sezioni: film e rete */
+.views { display: flex; gap: 26px; margin: 18px 0 0; }
+.views a {
+  padding: 2px 0 6px; color: var(--polvere); text-decoration: none;
+  font: 800 28px/1 var(--display); border-bottom: 3px solid transparent;
+}
+.views a:hover { color: var(--luce); }
+.views a[aria-current="page"] { color: var(--luce); border-bottom-color: var(--ottone); }
+.badge {
+  display: inline-grid; place-items: center; min-width: 24px; height: 24px; margin-left: 8px; padding: 0 7px;
+  border-radius: 12px; background: var(--mattone); color: #200b06; font: 700 14px/1 var(--testo); vertical-align: 4px;
+}
+body.vista-rete .solo-film, body:not(.vista-rete) .solo-rete { display: none !important; }
+
+/* Rete */
+.rete { padding: 30px var(--bordo) 64px; }
+.rete-accesa { display: grid; gap: 44px; }
+.rete h2 { margin: 0; font: 800 44px/1 var(--display); }
+.rete-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; margin-bottom: 16px; }
+.rete-head p { margin: 0; color: var(--polvere); }
+.rete .notice { margin: 0; }
+.fatti { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.fatto { padding: 16px 18px; border-radius: 8px; background: var(--velluto); border-top: 3px solid var(--velluto-2); }
+.fatto.ok { border-top-color: var(--ottone); }
+.fatto.male { border-top-color: var(--mattone); }
+.fatto h3 { margin: 0 0 6px; font: 700 17px/1.3 var(--testo); }
+.fatto p { margin: 0; color: var(--polvere); font-size: 15px; overflow-wrap: anywhere; }
+.fatto .actions { margin-top: 12px; }
+.avvisi, .dispositivi { list-style: none; margin: 0; padding: 0; }
+.avviso { padding: 14px 18px; border-left: 4px solid var(--polvere); border-radius: 0 8px 8px 0; background: var(--velluto); }
+.avviso + .avviso { margin-top: 10px; }
+.avviso.pericolo { border-left-color: var(--mattone); }
+.avviso.strano { border-left-color: var(--ottone); }
+.avviso.nuovo { border-left-color: var(--luce); }
+.avviso.letto { background: transparent; opacity: .78; }
+.avviso p { margin: 0; overflow-wrap: anywhere; }
+.avviso-titolo { font-weight: 700; }
+.avviso-testo { margin-top: 4px !important; max-width: 80ch; }
+.avviso-piede { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; margin-top: 8px !important; font-size: 14px; color: var(--polvere); }
+.vuoto { margin: 0; color: var(--polvere); }
+.grafico {
+  display: grid; grid-template-columns: repeat(24, minmax(0, 1fr)); align-items: end; gap: 4px;
+  height: 150px; margin: 0; padding: 0 0 26px; list-style: none;
+}
+.grafico li { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+.grafico .barra { display: block; min-height: 2px; border-radius: 2px 2px 0 0; background: rgba(216, 176, 104, .5); }
+.grafico li.adesso .barra { background: var(--ottone); }
+.grafico .ora { position: absolute; top: calc(100% + 6px); left: 0; font-size: 12px; color: var(--polvere); white-space: nowrap; }
+.disp {
+  display: grid; grid-template-columns: minmax(0, 1fr) 160px 132px 108px; grid-template-areas: "chi quando spark azione";
+  align-items: center; gap: 8px 22px; padding: 14px 0; border-top: 1px solid var(--linea);
+}
+.disp:last-child { border-bottom: 1px solid var(--linea); }
+.disp p { margin: 0; }
+.disp-chi { grid-area: chi; min-width: 0; }
+.disp-nome { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; overflow-wrap: anywhere; }
+.disp-info { font-size: 14px; color: var(--polvere); overflow-wrap: anywhere; }
+.disp-quando { grid-area: quando; font-size: 14px; color: var(--polvere); }
+.disp-quando.online { color: var(--ottone); font-weight: 700; }
+.disp-azione { grid-area: azione; justify-self: end; }
+.altri { margin-top: 14px; }
+.tag { padding: 2px 8px; border-radius: 4px; background: var(--luce); color: var(--sala); font-size: 13px; font-weight: 700; }
+.tag.muto { background: transparent; border: 1px solid rgba(242, 236, 225, .35); color: var(--polvere); font-weight: 400; }
+.spark { grid-area: spark; display: flex; align-items: flex-end; gap: 1px; height: 30px; }
+.spark span { flex: 1; border-radius: 1px; background: rgba(216, 176, 104, .6); }
+.spark span:last-child { background: var(--ottone); }
+.rete-spenta { max-width: 780px; }
+.rete-spenta > p { color: var(--polvere); margin: 14px 0 0; }
+.passi { display: grid; gap: 14px; margin: 18px 0 0; padding-left: 1.4em; }
+.passi li::marker { color: var(--ottone); font-weight: 700; }
+.passi p { margin: 0 0 8px; }
+.passi .fatto-ok { color: var(--ottone); }
+code { padding: 2px 6px; border-radius: 4px; background: var(--sala); font: 400 15px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+.rete-crediti { margin: 0; font-size: 13px; color: var(--polvere); }
+.attesa { margin: 14px 0 0; color: var(--ottone); font-weight: 700; }
+
 .credits-foot { padding: 20px var(--bordo) 28px; font-size: 13px; color: var(--polvere); border-top: 1px solid var(--linea); }
 
 .toast {
@@ -322,6 +398,9 @@ dialog.medium { width: min(720px, calc(100vw - 24px)); }
   .detail-poster { width: min(240px, 70%); }
   .dock { right: 8px; left: 8px; bottom: 8px; width: auto; }
   .toast { inset: 10px 10px auto; padding: 10px 14px; font-size: 15px; }
+  .rete h2 { font-size: 36px; }
+  .disp { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "chi azione" "quando quando" "spark spark"; gap: 6px 14px; }
+  .spark { height: 22px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
@@ -332,18 +411,22 @@ dialog.medium { width: min(720px, calc(100vw - 24px)); }
 <header class="marquee">
   <div class="brand">
     <h1>Videoteca</h1>
+    <nav class="views" aria-label="Sezioni">
+      <a href="#film" id="tabFilm">Film</a>
+      <a href="#rete" id="tabRete">Rete<span class="badge" id="reteBadge" hidden></span></a>
+    </nav>
     <p class="tally" id="tally">Carico i film…</p>
   </div>
   <div class="tools">
-    <label class="search">
+    <label class="search solo-film">
       <span class="visually-hidden">Cerca tra i tuoi film</span>
       <input type="search" id="q" placeholder="Cerca un film" autocomplete="off">
     </label>
-    <label class="sort" id="genreWrap" hidden>
+    <label class="sort solo-film" id="genreWrap" hidden>
       <span class="visually-hidden">Filtra per genere</span>
       <select id="genre"></select>
     </label>
-    <label class="sort">
+    <label class="sort solo-film">
       <span class="visually-hidden">Ordina i film</span>
       <select id="sort">
         <option value="added">Più recenti</option>
@@ -351,18 +434,20 @@ dialog.medium { width: min(720px, calc(100vw - 24px)); }
         <option value="year">Per anno</option>
       </select>
     </label>
-    <button class="primary" type="button" id="addBtn">Aggiungi film</button>
+    <button class="primary solo-film" type="button" id="addBtn">Aggiungi film</button>
+    <button class="primary solo-rete" type="button" id="tgBtn">Collega Telegram</button>
     <button class="icon" type="button" id="settingsBtn" aria-label="Impostazioni" title="Impostazioni">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg>
     </button>
   </div>
-  <div class="space" id="space" hidden>
+  <div class="space solo-film" id="space" hidden>
     <div class="meter" aria-hidden="true"><span class="m-used" id="mUsed"></span><span class="m-reserve" id="mReserve"></span></div>
     <p class="space-text"><strong id="spaceMain"></strong> <span id="spaceNote"></span></p>
   </div>
 </header>
 
 <main>
+<div id="filmView">
   <section class="notice" id="keyNotice" hidden>
     <p>Per trovare da sola descrizioni, durata e copertine, la videoteca ha bisogno di una chiave gratuita di TMDB, il database dei film. Ci vogliono un paio di minuti.</p>
     <button class="primary" type="button" id="keyNoticeBtn">Inserisci la chiave</button>
@@ -382,9 +467,57 @@ dialog.medium { width: min(720px, calc(100vw - 24px)); }
     <button class="primary" type="button" id="emptyAdd">Aggiungi film</button>
   </section>
   <p class="no-match" id="noMatch" hidden>Nessun film corrisponde alla ricerca.</p>
+</div>
+
+<div class="rete" id="reteView" hidden>
+  <p class="form-error" id="reteError" role="alert"></p>
+  <section class="rete-spenta" id="reteSpenta" hidden aria-labelledby="spentaTitolo">
+    <h2 id="spentaTitolo">Il controllo della rete è spento</h2>
+    <p>Quando lo accendi, il Pi fa da DNS per la casa: vede quali siti contatta ogni dispositivo, li confronta con un elenco di siti pericolosi e ti avvisa su Telegram se trova qualcosa di strano. Non vede il contenuto di quello che fate.</p>
+    <ol class="passi">
+      <li><p>Sul Pi lancia <code>bash project-nas-home/rete.sh</code></p></li>
+      <li><p>Sull'Iliadbox metti il Pi come server DNS: lo script ti dice dove e cosa scrivere.</p></li>
+      <li><p>Collega Telegram, per ricevere gli avvisi sul telefono.</p><button class="primary" type="button" id="tgBtn2">Collega Telegram</button></li>
+    </ol>
+  </section>
+  <div class="rete-accesa" id="reteAccesa" hidden>
+    <ul class="fatti" id="reteFatti" aria-label="Stato del controllo"></ul>
+    <section class="notice" id="retePw" hidden>
+      <p>Metti una password alla videoteca: questa pagina mostra i dispositivi di casa e serve a collegare Telegram.</p>
+      <button class="primary" type="button" id="retePwBtn">Metti la password</button>
+    </section>
+    <section class="notice" id="reteVuota" hidden>
+      <p id="reteVuotaTesto"></p>
+    </section>
+    <section aria-labelledby="avvisiTitolo">
+      <div class="rete-head">
+        <h2 id="avvisiTitolo">Avvisi</h2>
+        <button class="small" type="button" id="lettiBtn" hidden>Segna tutti come letti</button>
+      </div>
+      <ul class="avvisi" id="avvisiList"></ul>
+      <button class="altri" type="button" id="altriAvvisi" hidden></button>
+      <p class="vuoto" id="avvisiVuoto" hidden>Nessun avviso. Se trovo qualcosa di strano te lo scrivo qui e su Telegram.</p>
+    </section>
+    <section aria-labelledby="attTitolo">
+      <div class="rete-head">
+        <h2 id="attTitolo">Attività</h2>
+        <p id="attTotale"></p>
+      </div>
+      <ol class="grafico" id="grafico"></ol>
+    </section>
+    <section aria-labelledby="dispTitolo">
+      <div class="rete-head">
+        <h2 id="dispTitolo">Dispositivi</h2>
+        <p id="dispTotale"></p>
+      </div>
+      <ul class="dispositivi" id="dispList"></ul>
+    </section>
+    <p class="rete-crediti">Elenco dei siti pericolosi: <a href="https://github.com/hagezi/dns-blocklists" target="_blank" rel="noopener">HaGeZi Threat Intelligence Feeds</a>. Il Pi vede solo quali siti contatta ogni dispositivo, non il contenuto.</p>
+  </div>
+</div>
 </main>
 
-<footer class="credits-foot">
+<footer class="credits-foot solo-film">
   Descrizioni e copertine da <a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database (TMDB)</a>. Questa app usa le API di TMDB ma non è approvata né certificata da TMDB.
 </footer>
 
@@ -474,6 +607,31 @@ dialog.medium { width: min(720px, calc(100vw - 24px)); }
       <button class="danger solid" type="button" id="confirmYes">Elimina film</button>
     </div>
   </div>
+</dialog>
+
+<dialog id="telegram" class="medium" aria-labelledby="tgTitolo">
+  <div class="panel">
+    <header class="panel-head">
+      <h2 id="tgTitolo">Avvisi su Telegram</h2>
+      <button class="close" type="button" data-close aria-label="Chiudi">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </header>
+    <div id="tgBody"></div>
+  </div>
+</dialog>
+
+<dialog id="rinomina" class="small" aria-labelledby="rinTitolo">
+  <form class="panel" id="rinForm">
+    <h2 id="rinTitolo">Nome del dispositivo</h2>
+    <p class="hint" id="rinInfo"></p>
+    <label><span class="visually-hidden">Nome</span><input id="rinInput" maxlength="60" autocomplete="off" placeholder="Per esempio: Telefono di Daniele"></label>
+    <p class="form-error" id="rinError" role="alert"></p>
+    <div class="actions end" style="margin-top: 18px">
+      <button type="button" data-close>Annulla</button>
+      <button class="primary" type="submit">Salva nome</button>
+    </div>
+  </form>
 </dialog>
 
 <div class="toast" id="toast" role="status" aria-live="polite" popover="manual"></div>
@@ -635,7 +793,7 @@ function visibleItems() {
 function render() {
   const count = state.items.length;
   const total = state.items.reduce((sum, it) => sum + it.size, 0);
-  $('#tally').textContent = !state.settings ? '' : count === 0 ? 'Nessun film' : `${filmCount(count)}, ${fmtBytes(total)}`;
+  if (vistaCorrente() === 'film') $('#tally').textContent = !state.settings ? '' : count === 0 ? 'Nessun film' : `${filmCount(count)}, ${fmtBytes(total)}`;
   renderSpace();
   renderGenres();
   $('#keyNotice').hidden = !state.settings || state.settings.has_key;
@@ -1622,6 +1780,318 @@ $('#pwRemove').addEventListener('click', async () => {
   }
 });
 
+/* ---------- Rete ---------- */
+const rete = { dati: null, timer: null, attesaTg: null, rinomina: null, tuttiAvvisi: false };
+const AVVISI_VISIBILI = 8;
+const numFmt = new Intl.NumberFormat('it-IT');
+const oraFmt = new Intl.DateTimeFormat('it-IT', { hour: '2-digit', minute: '2-digit' });
+const giornoFmt = new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'long' });
+const plurale = (n, uno, tanti) => n === 1 ? `1 ${uno}` : `${numFmt.format(n)} ${tanti}`;
+
+function vistaCorrente() { return location.hash === '#rete' ? 'rete' : 'film'; }
+
+function quando(ts) {
+  if (!ts) return 'mai';
+  const data = new Date(ts * 1000), diff = Date.now() / 1000 - ts;
+  if (diff < 90) return 'adesso';
+  if (diff < 3600) return `${Math.round(diff / 60)} min fa`;
+  const stesso = (a, b) => a.toDateString() === b.toDateString();
+  const oggi = new Date(), ieri = new Date();
+  ieri.setDate(oggi.getDate() - 1);
+  if (stesso(data, oggi)) return `oggi alle ${oraFmt.format(data)}`;
+  if (stesso(data, ieri)) return `ieri alle ${oraFmt.format(data)}`;
+  return `il ${giornoFmt.format(data)} alle ${oraFmt.format(data)}`;
+}
+const maiuscola = t => t ? t[0].toUpperCase() + t.slice(1) : t;
+
+function mostraVista() {
+  const vista = vistaCorrente();
+  document.body.classList.toggle('vista-rete', vista === 'rete');
+  $('#filmView').hidden = vista !== 'film';
+  $('#reteView').hidden = vista !== 'rete';
+  for (const [id, nome] of [['#tabFilm', 'film'], ['#tabRete', 'rete']]) {
+    if (nome === vista) $(id).setAttribute('aria-current', 'page'); else $(id).removeAttribute('aria-current');
+  }
+  document.title = vista === 'rete' ? 'Rete di casa' : 'Videoteca';
+  clearInterval(rete.timer);
+  if (vista === 'rete') {
+    $('#tally').textContent = rete.dati ? $('#tally').textContent : 'Controllo la rete…';
+    loadRete();
+    rete.timer = setInterval(() => { if (!document.hidden) loadRete(); }, 20000);
+  } else if (state.settings) {
+    render();
+  }
+}
+
+function impostaBadge(n) {
+  const badge = $('#reteBadge');
+  badge.hidden = !n;
+  badge.textContent = n > 99 ? '99+' : String(n || '');
+  $('#tabRete').setAttribute('aria-label', n ? `Rete, ${plurale(n, 'avviso da leggere', 'avvisi da leggere')}` : 'Rete');
+}
+
+async function aggiornaBadge() {
+  try { impostaBadge((await api('/api/rete/conta')).da_leggere); } catch { /* il badge può aspettare */ }
+}
+
+async function loadRete() {
+  try {
+    const [dati, settings] = await Promise.all([api('/api/rete'), api('/api/settings')]);
+    rete.dati = dati; state.settings = settings;
+    $('#reteError').textContent = '';
+    renderRete();
+  } catch (err) {
+    $('#reteError').textContent = err.status === 503 ? 'Il controllo della rete non è installato: aggiorna la videoteca sul Pi.' : err.message;
+  }
+}
+
+function renderRete() {
+  const d = rete.dati;
+  if (!d) return;
+  impostaBadge(d.da_leggere);
+  const tg = d.telegram || {};
+  for (const id of ['#tgBtn', '#tgBtn2']) {
+    $(id).textContent = tg.collegato ? 'Telegram collegato' : 'Collega Telegram';
+    $(id).classList.toggle('primary', !tg.collegato);
+  }
+  $('#reteSpenta').hidden = !!d.configurata;
+  $('#reteAccesa').hidden = !d.configurata;
+  if (vistaCorrente() === 'rete') {
+    const visti = d.dispositivi.filter(x => x.tipo !== 'pi' && Date.now() / 1000 - x.ultimo < 86400).length;
+    $('#tally').textContent = !d.configurata ? 'Controllo della rete spento'
+      : `${plurale(visti, 'dispositivo visto oggi', 'dispositivi visti oggi')}, ${d.da_leggere ? plurale(d.da_leggere, 'avviso da leggere', 'avvisi da leggere') : 'nessun avviso da leggere'}`;
+  }
+  if (!d.configurata) return;
+  renderFatti(d);
+  $('#retePw').hidden = !state.settings || state.settings.has_password;
+  const silenzio = d.attiva && d.attivita.every(n => n === 0) && d.dispositivi.every(x => x.tipo === 'pi' || !x.totale);
+  $('#reteVuota').hidden = !silenzio;
+  if (silenzio) {
+    const ip = (state.settings?.addresses || []).find(a => !a.tailscale)?.ip || 'del Pi';
+    $('#reteVuotaTesto').textContent = `Il Pi non riceve ancora richieste dagli altri dispositivi. Sull'Iliadbox, nelle impostazioni del DHCP, metti ${ip} come unico server DNS; poi spegni e riaccendi il Wi-Fi dei dispositivi.`;
+  }
+  renderAvvisi(d);
+  renderGrafico(d);
+  renderDispositivi(d);
+}
+
+function renderFatti(d) {
+  const fatti = [];
+  let stato;
+  if (!d.attiva) stato = { classe: '', titolo: 'Sto accendendo il controllo', testo: 'Ci vuole qualche secondo.' };
+  else if (d.registro?.stato === 'errore') stato = { classe: 'male', titolo: 'Non riesco a leggere il DNS', testo: d.registro.errore };
+  else if (d.dns?.ok === false) stato = { classe: 'male', titolo: 'Il DNS del Pi non risponde', testo: 'In casa internet potrebbe non funzionare. Riavvia il Pi.' };
+  else if (d.apprendimento_fino) stato = { classe: 'ok', titolo: 'Controllo attivo', testo: `Fino alle ${oraFmt.format(new Date(d.apprendimento_fino * 1000))} imparo quali dispositivi ci sono già, senza avvisarti.` };
+  else stato = { classe: 'ok', titolo: 'Controllo attivo', testo: `Acceso ${quando(d.da)}.` };
+  fatti.push(h('li', { class: `fatto ${stato.classe}` }, h('h3', { text: stato.titolo }), h('p', { text: stato.testo })));
+
+  const liste = d.liste || {};
+  fatti.push(h('li', { class: `fatto ${liste.errore ? 'male' : liste.domini ? 'ok' : ''}` },
+    h('h3', { text: liste.domini ? `${numFmt.format(liste.domini)} siti pericolosi conosciuti` : 'Scarico l’elenco dei siti pericolosi' }),
+    h('p', { text: liste.errore || (liste.domini ? `Più ${numFmt.format(liste.ip || 0)} server. Elenco aggiornato ${quando(liste.aggiornate)}; si aggiorna da solo ogni giorno.` : 'Serve qualche minuto la prima volta.') })));
+
+  const tg = d.telegram || {};
+  fatti.push(h('li', { class: `fatto ${tg.errore ? 'male' : tg.collegato ? 'ok' : ''}` },
+    h('h3', { text: tg.collegato ? 'Avvisi su Telegram' : 'Telegram non collegato' }),
+    h('p', { text: tg.errore || (tg.collegato ? `Arrivano${tg.nome ? ' a ' + tg.nome : ''} dal bot @${tg.bot}.` : 'Collegalo per ricevere gli avvisi sul telefono.') }),
+    h('div', { class: 'actions' }, h('button', { class: tg.collegato ? 'small' : 'small primary', type: 'button', text: tg.collegato ? 'Gestisci' : 'Collega Telegram', onclick: apriTelegram }))));
+  $('#reteFatti').replaceChildren(...fatti);
+}
+
+function renderAvvisi(d) {
+  $('#lettiBtn').hidden = !d.da_leggere;
+  $('#avvisiVuoto').hidden = d.avvisi.length > 0;
+  const mostrati = rete.tuttiAvvisi ? d.avvisi : d.avvisi.slice(0, AVVISI_VISIBILI);
+  const nascosti = d.avvisi.length - mostrati.length;
+  $('#altriAvvisi').hidden = nascosti <= 0;
+  $('#altriAvvisi').textContent = `Mostra gli altri ${plurale(nascosti, 'avviso', 'avvisi')}`;
+  $('#avvisiList').replaceChildren(...mostrati.map(a => h('li', { class: `avviso ${a.tipo}${a.letto ? ' letto' : ''}` },
+    h('p', { class: 'avviso-titolo', text: a.titolo }),
+    h('p', { class: 'avviso-testo', text: a.dettaglio }),
+    h('p', { class: 'avviso-piede' },
+      h('span', { text: maiuscola(quando(a.ts)) + (a.letto ? '' : ', da leggere') }),
+      a.tipo === 'sistema' ? null : h('button', { class: 'link-btn', type: 'button', text: 'Non avvisarmi più per questo', onclick: () => ignoraAvviso(a) })))));
+}
+
+function renderGrafico(d) {
+  const max = Math.max(1, ...d.attivita);
+  const totale = d.attivita.reduce((a, b) => a + b, 0);
+  $('#attTotale').textContent = `${plurale(totale, 'richiesta', 'richieste')} DNS nelle ultime 24 ore`;
+  $('#grafico').setAttribute('aria-label', `Richieste DNS di tutta la casa ora per ora, nelle ultime 24 ore: in tutto ${numFmt.format(totale)}.`);
+  $('#grafico').replaceChildren(...d.ore.map((inizio, i) => {
+    const n = d.attivita[i], ora = new Date(inizio * 1000).getHours();
+    return h('li', { class: i === d.ore.length - 1 ? 'adesso' : null, title: `Dalle ${ora}:00: ${plurale(n, 'richiesta', 'richieste')}` },
+      h('span', { class: 'barra', style: `height: ${n ? Math.max(3, 100 * n / max) : 0}%` }),
+      ora % 6 === 0 ? h('span', { class: 'ora', text: `${ora}:00` }) : null);
+  }));
+}
+
+function infoDispositivo(x) {
+  const parti = [];
+  if (x.nome && x.produttore) parti.push(x.produttore);
+  if (x.ip) parti.push(x.ip);
+  else if (x.ip6) parti.push(x.ip6);
+  return parti.join(', ');
+}
+
+function renderDispositivi(d) {
+  const lista = d.dispositivi;
+  const adesso = Date.now() / 1000;
+  $('#dispTotale').textContent = `${plurale(lista.filter(x => adesso - x.ultimo < 900).length, 'attivo', 'attivi')} adesso, ${plurale(lista.length, 'conosciuto', 'conosciuti')}`;
+  $('#dispList').replaceChildren(...lista.map(x => {
+    const online = adesso - x.ultimo < 900;
+    const max = Math.max(1, ...x.attivita);
+    return h('li', { class: 'disp' },
+      h('div', { class: 'disp-chi' },
+        h('p', { class: 'disp-nome' }, h('strong', { text: x.mostrato }),
+          x.nuovo ? h('span', { class: 'tag', text: 'Nuovo' }) : null,
+          x.senza_dns ? h('span', { class: 'tag muto', text: 'Non usa il DNS del Pi', title: 'È in rete ma non chiede nomi al Pi: forse ha un DNS suo, quindi il controllo non lo vede.' }) : null),
+        h('p', { class: 'disp-info', text: infoDispositivo(x) })),
+      h('p', { class: `disp-quando${online ? ' online' : ''}`, text: online ? 'Attivo adesso' : `Visto ${quando(x.ultimo)}` }),
+      h('div', { class: 'spark', role: 'img', 'aria-label': `${plurale(x.totale, 'richiesta', 'richieste')} nelle ultime 24 ore` },
+        x.attivita.map(n => h('span', { style: `height: ${n ? Math.max(8, 100 * n / max) : 0}%` }))),
+      h('div', { class: 'disp-azione' }, x.tipo === 'pi' ? null : h('button', { class: 'small', type: 'button', text: 'Rinomina', onclick: () => apriRinomina(x) })));
+  }));
+}
+
+async function segnaLetti() {
+  try { await api('/api/rete/letti', { json: {} }); await loadRete(); } catch (err) { toast(err.message); }
+}
+
+async function ignoraAvviso(a) {
+  try {
+    await api('/api/rete/ignora', { json: { id: a.id } });
+    toast('Va bene: per questo non ti avviso più.');
+    await loadRete();
+  } catch (err) { toast(err.message); }
+}
+
+function apriRinomina(x) {
+  rete.rinomina = x;
+  $('#rinInfo').textContent = [x.produttore, x.ip || x.ip6, x.mac].filter(Boolean).join(', ');
+  $('#rinInput').value = x.nome || '';
+  $('#rinError').textContent = '';
+  $('#rinomina').showModal();
+  $('#rinInput').focus();
+}
+
+async function salvaNome(e) {
+  e.preventDefault();
+  try {
+    await api('/api/rete/nome', { json: { chiave: rete.rinomina.chiave, nome: $('#rinInput').value } });
+    $('#rinomina').close();
+    toast('Nome salvato');
+    await loadRete();
+  } catch (err) { $('#rinError').textContent = err.message; }
+}
+
+/* Telegram */
+function telegramDati() { return rete.dati?.telegram || {}; }
+
+function apriTelegram() {
+  renderTelegram();
+  if (!$('#telegram').open) $('#telegram').showModal();
+  const tg = telegramDati();
+  if (tg.token && !tg.collegato) aspettaTelegram();
+}
+
+function renderTelegram() {
+  const tg = telegramDati();
+  const corpo = $('#tgBody');
+  if (tg.collegato) {
+    corpo.replaceChildren(
+      h('p', { text: `Collegato: gli avvisi arrivano${tg.nome ? ' a ' + tg.nome : ''} su Telegram, dal bot @${tg.bot}.` }),
+      h('p', { class: 'form-error', text: tg.errore || '' }),
+      h('div', { class: 'actions', style: 'margin-top: 18px' },
+        h('button', { class: 'primary', type: 'button', text: 'Manda una prova', onclick: provaTelegram }),
+        h('button', { class: 'danger', type: 'button', text: 'Scollega', onclick: scollegaTelegram })));
+    return;
+  }
+  if (tg.token) {
+    corpo.replaceChildren(
+      h('ol', { class: 'passi' },
+        h('li', null, h('p', { class: 'fatto-ok', text: `Bot pronto: @${tg.bot}.` })),
+        h('li', null, h('p', { text: 'Apri il bot su Telegram e premi «Avvia» (oppure scrivi /start).' }),
+          h('a', { class: 'btn primary', href: `https://t.me/${tg.bot}`, target: '_blank', rel: 'noopener', text: `Apri @${tg.bot}` }))),
+      h('p', { class: 'attesa', id: 'tgAttesa', 'aria-live': 'polite', text: 'Aspetto il tuo messaggio…' }),
+      h('button', { class: 'link-btn', type: 'button', style: 'margin-top: 16px', text: 'Usa un altro bot', onclick: scollegaTelegram }));
+    return;
+  }
+  corpo.replaceChildren(
+    h('p', { class: 'hint', text: 'Gli avvisi arrivano da un bot di Telegram tutto tuo: si crea in un minuto e lo vedi solo tu.' }),
+    h('ol', { class: 'passi' },
+      h('li', null, h('p', null, 'Su Telegram apri ', h('a', { href: 'https://t.me/BotFather', target: '_blank', rel: 'noopener', text: '@BotFather' }),
+        ' e scrivi /newbot. Scegli un nome, per esempio «Rete di casa», e poi un nome utente che finisce con «bot».')),
+      h('li', null, h('p', { text: 'BotFather ti risponde con il token: una riga tipo 123456789:AAH… Copiala e incollala qui.' }),
+        h('form', { class: 'row', onsubmit: salvaToken },
+          h('label', { class: 'grow' }, h('span', { class: 'visually-hidden', text: 'Token del bot' }),
+            h('input', { id: 'tgToken', type: 'password', autocomplete: 'off', spellcheck: 'false', placeholder: 'Incolla qui il token' })),
+          h('button', { class: 'primary', type: 'submit', text: 'Collega' }))),
+      h('li', null, h('p', { text: 'Poi apri il bot e premi «Avvia»: la videoteca se ne accorge da sola.' }))),
+    h('p', { class: 'form-error', id: 'tgErrore', role: 'alert' }));
+}
+
+async function salvaToken(e) {
+  e.preventDefault();
+  const bottone = e.submitter || e.target.querySelector('button');
+  bottone.disabled = true;
+  $('#tgErrore').textContent = '';
+  try {
+    const tg = await api('/api/rete/telegram', { json: { token: $('#tgToken').value } });
+    rete.dati = rete.dati || {};
+    rete.dati.telegram = tg;
+    renderTelegram();
+    aspettaTelegram();
+  } catch (err) {
+    $('#tgErrore').textContent = err.message;
+    bottone.disabled = false;
+  }
+}
+
+async function aspettaTelegram() {
+  const turno = {};
+  rete.attesaTg = turno;
+  const fine = Date.now() + 5 * 60 * 1000;
+  while (rete.attesaTg === turno && $('#telegram').open && Date.now() < fine) {
+    try {
+      const tg = await api('/api/rete/telegram/collega', { json: {} });
+      if (rete.attesaTg !== turno) return;
+      rete.dati = rete.dati || {};
+      rete.dati.telegram = tg;
+      if (tg.collegato) {
+        renderTelegram();
+        toast('Telegram collegato: ti ho mandato un messaggio');
+        loadRete();
+        return;
+      }
+    } catch (err) {
+      const riga = $('#tgAttesa');
+      if (riga) riga.textContent = err.message;
+    }
+    await sleep(3000);
+  }
+  const riga = $('#tgAttesa');
+  if (riga && rete.attesaTg === turno) riga.textContent = 'Non è arrivato niente. Apri il bot, premi «Avvia» e poi riapri questa finestra.';
+}
+
+async function provaTelegram() {
+  try {
+    rete.dati.telegram = await api('/api/rete/telegram/prova', { json: {} });
+    toast('Messaggio di prova mandato: guarda Telegram');
+  } catch (err) { toast(err.message); }
+  renderTelegram();
+}
+
+async function scollegaTelegram() {
+  try {
+    rete.attesaTg = null;
+    rete.dati = rete.dati || {};
+    rete.dati.telegram = await api('/api/rete/telegram/scollega', { json: {} });
+    renderTelegram();
+    if (rete.dati.attivita) renderRete();
+  } catch (err) { toast(err.message); }
+}
+
 /* ---------- Avvio ---------- */
 if (!HAS_POPOVER) $('#toast').style.display = 'none';
 document.addEventListener('click', e => {
@@ -1629,7 +2099,7 @@ document.addEventListener('click', e => {
   if (closer) closer.closest('dialog').close();
 });
 document.addEventListener('keydown', e => {
-  if (e.key === '/' && !e.target.closest('input, textarea, select') && !document.querySelector('dialog[open]')) {
+  if (e.key === '/' && vistaCorrente() === 'film' && !e.target.closest('input, textarea, select') && !document.querySelector('dialog[open]')) {
     e.preventDefault();
     $('#q').focus();
   }
@@ -1655,9 +2125,20 @@ $('#sort').value = ['added', 'title', 'year'].includes(state.sort) ? state.sort 
 $('#sort').addEventListener('change', e => { state.sort = e.target.value; store.set('sort', state.sort); render(); });
 $('#genre').addEventListener('change', e => { state.genre = e.target.value; store.set('genre', state.genre); render(); });
 window.addEventListener('online', () => { if (queue.jobs.some(j => j.state === 'riprovo')) toast('Connessione tornata: riprendo il caricamento'); });
+$('#tgBtn').addEventListener('click', apriTelegram);
+$('#tgBtn2').addEventListener('click', apriTelegram);
+$('#lettiBtn').addEventListener('click', segnaLetti);
+$('#altriAvvisi').addEventListener('click', () => { rete.tuttiAvvisi = true; renderRete(); });
+$('#retePwBtn').addEventListener('click', openSettings);
+$('#rinForm').addEventListener('submit', salvaNome);
+$('#telegram').addEventListener('close', () => { rete.attesaTg = null; });
+window.addEventListener('hashchange', mostraVista);
+setInterval(() => { if (!document.hidden && vistaCorrente() === 'film') aggiornaBadge(); }, 60000);
 $('#sharePath').textContent = sharePath(location.hostname);
 $('#shareHow').textContent = IS_MAC ? ' (nel Finder: menu Vai, poi Connessione al server)' : '';
 loadLibrary();
+mostraVista();
+if (vistaCorrente() === 'film') aggiornaBadge();
 </script>
 </body>
 </html>

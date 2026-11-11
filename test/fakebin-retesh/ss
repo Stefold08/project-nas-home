@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "ss $*" >> /tmp/rete-sh/registro
+[ -f /tmp/rete-sh/porta-occupata ] && echo 'UNCONN 0 0 127.0.0.53%lo:53 0.0.0.0:* users:(("systemd-resolve",pid=1,fd=1))'
+exit 0

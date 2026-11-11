@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+import json, sys
+a = " ".join(sys.argv[1:])
+if "route" in a:
+    print(json.dumps([{"dst": "default", "gateway": "192.168.1.254", "dev": "eth0"}]))
+elif "-4" in a:
+    print(json.dumps([{"ifname": "eth0", "addr_info": [{"family": "inet", "local": "192.168.1.37", "prefixlen": 24}]}]))
+elif "-6" in a:
+    print(json.dumps([{"ifname": "eth0", "addr_info": [
+        {"family": "inet6", "local": "2a01:e0a:1:2::99", "temporary": True},
+        {"family": "inet6", "local": "2a01:e0a:1:2:aaaa:bbbb:cccc:37"},
+        {"family": "inet6", "local": "fd12:3456::37"}]}]))
+else:
+    print("[]")

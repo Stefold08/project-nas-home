@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "journalctl $*" >> /tmp/rete-sh/registro
+sed 's/^.*\]: //' /tmp/rete-sh/dns.log 2>/dev/null

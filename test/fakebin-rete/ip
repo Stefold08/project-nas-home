@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+"""Finto comando `ip` per le prove del controllo della rete: dispositivi su indirizzi 127.0.0.x."""
+import json
+import sys
+
+a = [x for x in sys.argv[1:] if x != "-j"]
+if a[:2] == ["neigh", "show"]:
+    print(json.dumps([
+        {"dst": "127.0.0.5", "dev": "lo", "lladdr": "f0:18:98:00:00:05", "state": ["REACHABLE"]},
+        {"dst": "127.0.0.6", "dev": "lo", "lladdr": "3a:11:22:33:44:55", "state": ["STALE"]},
+        {"dst": "127.0.0.7", "dev": "lo", "lladdr": "00:1a:2b:00:00:07", "state": ["DELAY"]},
+        {"dst": "127.0.0.8", "dev": "lo", "lladdr": "00:1a:2b:00:00:08", "state": ["REACHABLE"]},
+        {"dst": "127.0.0.9", "dev": "lo", "state": ["FAILED"]},
+        {"dst": "192.0.2.1", "dev": "eth0", "lladdr": "00:24:d4:00:00:01", "state": ["REACHABLE"]},
+    ]))
+elif "addr" in a:
+    print(json.dumps([
+        {"ifname": "lo", "addr_info": [{"family": "inet", "local": "127.0.0.1", "prefixlen": 8}]},
+        {"ifname": "eth0", "addr_info": [{"family": "inet", "local": "192.0.2.10", "prefixlen": 24},
+                                         {"family": "inet6", "local": "fd00::10", "prefixlen": 64}]},
+    ]))
+elif a[:3] == ["route", "show", "default"]:
+    print(json.dumps([{"dst": "default", "gateway": "192.0.2.1", "dev": "eth0"}]))
+else:
+    print("[]")

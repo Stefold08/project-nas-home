@@ -1,0 +1,11 @@
+#!/bin/sh
+echo "systemctl $*" >> /tmp/rete-sh/registro
+case "$*" in
+  "restart dnsmasq")
+    [ -f /tmp/rete-sh/dns.pid ] && kill "$(cat /tmp/rete-sh/dns.pid)" 2>/dev/null; sleep 0.3
+    dnsmasq --conf-file=/etc/dnsmasq.d/videoteca.conf --port=53 --listen-address=127.0.0.1 --bind-interfaces \
+      --address=/example.com/93.184.216.34 --log-facility=/tmp/rete-sh/dns.log --user=root --pid-file=/tmp/rete-sh/dns.pid ;;
+  "disable --now dnsmasq")
+    [ -f /tmp/rete-sh/dns.pid ] && kill "$(cat /tmp/rete-sh/dns.pid)" 2>/dev/null ;;
+esac
+exit 0

@@ -38,6 +38,10 @@ $SUDO tee "$APP_DIR/index.html" >/dev/null <<'VIDEOTECA_HTML_FINE'
 @@INDEX_HTML@@
 VIDEOTECA_HTML_FINE
 
+$SUDO tee "$APP_DIR/rete.py" >/dev/null <<'VIDEOTECA_RETE_FINE'
+@@RETE_PY@@
+VIDEOTECA_RETE_FINE
+
 if [ ! -f "$APP_DIR/config.json" ]; then
   $SUDO tee "$APP_DIR/config.json" >/dev/null <<EOF
 {
@@ -58,6 +62,12 @@ if [ "${VIDEOTECA_NO_SYSTEMD:-0}" = "1" ]; then
   exit 0
 fi
 
+# Il controllo della rete legge il registro di dnsmasq: serve il permesso di leggere il journal.
+GRUPPI=""
+if getent group systemd-journal >/dev/null 2>&1; then
+  GRUPPI="SupplementaryGroups=systemd-journal"
+fi
+
 $SUDO tee /etc/systemd/system/videoteca.service >/dev/null <<EOF
 [Unit]
 Description=Videoteca, la dashboard dei film
@@ -68,6 +78,7 @@ Wants=network-online.target
 Type=simple
 User=$RUN_USER
 Group=$RUN_USER
+$GRUPPI
 WorkingDirectory=$APP_DIR
 ExecStart=/usr/bin/python3 $APP_DIR/videoteca.py
 Restart=on-failure

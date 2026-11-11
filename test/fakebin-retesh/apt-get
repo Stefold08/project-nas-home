@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "apt-get $*" >> /tmp/rete-sh/registro

@@ -27,7 +27,7 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
-VERSION = "1.1"
+VERSION = "1.2"
 APP_DIR = Path(__file__).resolve().parent
 CONFIG_PATH = Path(os.environ.get("VIDEOTECA_CONFIG") or APP_DIR / "config.json")
 INDEX_PATH = APP_DIR / "index.html"
@@ -107,6 +107,24 @@ def save_config():
             fh.write("\n")
         os.chmod(tmp, 0o600)
         os.replace(tmp, CONFIG_PATH)
+
+
+# Il controllo della rete sta in rete.py: se manca o non parte, la Videoteca funziona lo stesso.
+try:
+    import rete as rete_mod
+    RETE = rete_mod.Rete(CFG, save_config, APP_DIR)
+except Exception as _exc:  # noqa: BLE001
+    rete_mod, RETE = None, None
+    print(f"Controllo della rete non disponibile: {_exc}", file=sys.stderr)
+
+
+def rete_chiama(nome, *argomenti):
+    if RETE is None:
+        raise AppError("Il controllo della rete non è installato su questo Pi.", 503)
+    try:
+        return getattr(RETE, nome)(*argomenti)
+    except rete_mod.ReteErrore as exc:
+        raise AppError(str(exc), exc.status) from exc
 
 
 def language():
@@ -973,6 +991,10 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_json({"sessions": [public_session(s) for s in read_sessions()]})
         if route == "/api/upload/status":
             return self.send_json(public_session(load_session(arg("id"))))
+        if route == "/api/rete":
+            return self.send_json(rete_chiama("vista"))
+        if route == "/api/rete/conta":
+            return self.send_json(rete_chiama("conta"))
         if route.startswith("/media/"):
             return self.send_media(urllib.parse.unquote(route[len("/media/"):]))
         raise AppError("Pagina non trovata.", 404)
@@ -1005,6 +1027,27 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_json({"ok": True, "disk": disk_info()})
         if route == "/api/settings":
             return self.send_json(update_settings(self.read_json()))
+        if route.startswith("/api/rete/"):
+            return self.route_rete(route[len("/api/rete/"):], self.read_json())
+        raise AppError("Pagina non trovata.", 404)
+
+    def route_rete(self, azione, dati):
+        if azione == "nome":
+            return self.send_json(rete_chiama("rinomina", dati.get("chiave"), dati.get("nome")))
+        if azione == "letti":
+            return self.send_json(rete_chiama("segna_letti"))
+        if azione == "ignora":
+            return self.send_json(rete_chiama("ignora", dati.get("id")))
+        if azione == "liste":
+            return self.send_json(rete_chiama("aggiorna_liste_adesso"))
+        if azione == "telegram":
+            return self.send_json(rete_chiama("telegram_imposta", dati.get("token")))
+        if azione == "telegram/collega":
+            return self.send_json(rete_chiama("telegram_collega"))
+        if azione == "telegram/prova":
+            return self.send_json(rete_chiama("telegram_prova"))
+        if azione == "telegram/scollega":
+            return self.send_json(rete_chiama("telegram_scollega"))
         raise AppError("Pagina non trovata.", 404)
 
     # ---- lettura delle richieste
@@ -1172,6 +1215,8 @@ class Handler(BaseHTTPRequestHandler):
 
 def main():
     clean_leftovers()
+    if RETE is not None:
+        RETE.avvia()
     server = ThreadingHTTPServer(("0.0.0.0", server_port()), Handler)
     server.daemon_threads = True
     print(f"Videoteca {VERSION} pronta sulla porta {server_port()} (film in {library_root()})", flush=True)

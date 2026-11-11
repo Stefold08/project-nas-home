@@ -1,0 +1,5 @@
+F0-18-98   (hex)		Apple, Inc.
+F01898     (base 16)		Apple, Inc.
+
+00-1A-2B   (hex)		Samsung Electronics Co.,Ltd
+00-24-D4   (hex)		FREEBOX SAS
